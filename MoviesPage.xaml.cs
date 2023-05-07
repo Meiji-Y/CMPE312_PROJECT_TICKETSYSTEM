@@ -19,8 +19,10 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
     /// <summary>
     /// MoviesPage.xaml etkileşim mantığı
     /// </summary>
+    
     public partial class MoviesPage : Window
     {
+        private int CId;
         public void ShowDetail(int ParameterMId)
         {
             SqlConnection sqlConnection;
@@ -47,10 +49,11 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
                 string MovieSummary = reader.GetString(3);
                 string Movielanguage = reader.GetString(4);
                 int MovieDuration = reader.GetInt32(5);
+               
                 string MovieImage = "selam";
 
                 // Detay sayfasına verileri aktar
-                MovieDetailPage MovieDetailPage = new MovieDetailPage(MId, MovieName, MovieType, MovieSummary, Movielanguage, MovieDuration, MovieImage);
+                MovieDetailPage MovieDetailPage = new MovieDetailPage(CId, MId, MovieName, MovieType, MovieSummary, Movielanguage, MovieDuration, MovieImage);
 
                 MovieDetailPage.Show(); // Detay sayfasını göster
                 this.Close();
@@ -59,9 +62,10 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
             sqlConnection.Close(); // bağlantıyı kapat
         }
-        public MoviesPage()
+        public MoviesPage(int CId)
         {
             InitializeComponent();
+            this.CId = CId;
 
 
         }

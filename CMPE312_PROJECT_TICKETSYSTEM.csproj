@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheckoutPage.xaml.cs">
+      <DependentUpon>CheckoutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MovieDetailPage.xaml.cs">
       <DependentUpon>MovieDetailPage.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TicketSystemDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Page Include="CheckoutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

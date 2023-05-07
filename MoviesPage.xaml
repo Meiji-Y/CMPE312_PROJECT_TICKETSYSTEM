@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CMPE312_PROJECT_TICKETSYSTEM"
         mc:Ignorable="d"
-        Title="MoviesPage" Height="452" Width="800">
+        Title="MoviesPage" Height="480" Width="800">
     <Grid>
         <Image HorizontalAlignment="Left" Height="170" Margin="37,31,0,0" VerticalAlignment="Top" Width="122" Source="/Prestige.png" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="170" Margin="189,31,0,0" VerticalAlignment="Top" Width="122" Source="/Seven.png" Stretch="Fill"/>

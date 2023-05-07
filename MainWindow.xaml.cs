@@ -16,7 +16,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using System.Security.Policy;
-
+using System.Security.Claims;
 
 namespace CMPE312_PROJECT_TICKETSYSTEM
 {
@@ -51,7 +51,6 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
             // SQL sorgusu: verilen e-postaya sahip müşterinin şifresini sorgula
             string query = "SELECT UserPassword FROM Customers WHERE UserName=@UserName";
-
             // SqlCommand nesnesini oluştur
             SqlCommand command = new SqlCommand(query, sqlConnection);
 
@@ -59,12 +58,15 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             command.Parameters.AddWithValue("@UserName", UserName);
             command.Parameters.AddWithValue("@UserPassword", UserPassword);
 
+            string query2 = "SELECT CId FROM Customers WHERE UserName=@UserName ";
+            SqlCommand command2 = new SqlCommand(query2, sqlConnection);
+            command2.Parameters.AddWithValue("@UserName", UserName);
             // Bağlantıyı aç
             sqlConnection.Open();
 
             // Sorguyu çalıştır ve sonucu al
             var result =(string)command.ExecuteScalar();
-
+            int CId = (int)command2.ExecuteScalar();
             // Bağlantıyı kapat
             sqlConnection.Close();
 
@@ -73,7 +75,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             {
                 // Login başarılı
                 
-                MoviesPage MoviesPage = new MoviesPage();
+                MoviesPage MoviesPage = new MoviesPage(CId);
                 MoviesPage.Show();
                 MessageBox.Show("Login is Successful");
                 this.Close();
