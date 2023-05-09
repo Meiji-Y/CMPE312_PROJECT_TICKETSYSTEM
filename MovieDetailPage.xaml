@@ -23,6 +23,7 @@
         <TextBox x:Name="MovieSummaryText" HorizontalAlignment="Left" Margin="246,208,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="370" Height="145" BorderBrush="White" IsReadOnly="True" IsUndoEnabled="False"/>
         <Button Content="Back" HorizontalAlignment="Left" Margin="53,367,0,0" VerticalAlignment="Top" Height="41" Width="131" Click="Button_Click"/>
         <Button x:Name="CheckoutButton" Content="Checkout " HorizontalAlignment="Left" Margin="609,367,0,0" VerticalAlignment="Top" Height="41" Width="131" Click="CheckoutButton_Click"  />
+        <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="216" Margin="31,70,0,0" VerticalAlignment="Top" Width="165" Source="{Binding ImageSource}" Stretch="Fill" />
 
     </Grid>
 </Window>

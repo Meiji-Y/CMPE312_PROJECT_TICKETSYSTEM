@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,14 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
     public partial class MoviesPage : Window
     {
         private int CId;
+        private int MId;
+        private string MovieName;
+        private string MovieType;
+        private string MovieSummary;
+        private string MovieLanguage;
+        private int MovieDuration;
+        private byte[] MovieImage;
+
         public void ShowDetail(int ParameterMId)
         {
             SqlConnection sqlConnection;
@@ -49,9 +58,8 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
                 string MovieSummary = reader.GetString(3);
                 string Movielanguage = reader.GetString(4);
                 int MovieDuration = reader.GetInt32(5);
-               
-                string MovieImage = "selam";
-
+                
+                byte[] MovieImage = (byte[])reader["MovieImage"];
                 // Detay sayfasına verileri aktar
                 MovieDetailPage MovieDetailPage = new MovieDetailPage(CId, MId, MovieName, MovieType, MovieSummary, Movielanguage, MovieDuration, MovieImage);
 
@@ -60,12 +68,20 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             }
 
 
+
             sqlConnection.Close(); // bağlantıyı kapat
         }
+
+       
+
+
         public MoviesPage(int CId)
         {
             InitializeComponent();
             this.CId = CId;
+          
+           
+            
 
 
         }
@@ -94,6 +110,13 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
         private void mov5_Click(object sender, RoutedEventArgs e)
         {
             ShowDetail(106);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+            
         }
     }
 }

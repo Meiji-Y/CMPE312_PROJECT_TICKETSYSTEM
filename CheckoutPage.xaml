@@ -20,7 +20,7 @@
         <Button Content="Complete Checkout" HorizontalAlignment="Left" Margin="624,348,0,0" VerticalAlignment="Top" Height="47" Width="133" Click="Button_Click"/>
         <Button x:Name="BackButton" Content="Back to Movies Page" HorizontalAlignment="Left" Margin="74,343,0,0" VerticalAlignment="Top" Height="47" Width="133" Click="BackButton_Click" />
         <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="615,289,0,0" VerticalAlignment="Top" Height="45" Width="101" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="690,303,0,0" TextWrapping="Wrap" Text="75 TL" VerticalAlignment="Top" Width="90" />
-
+        <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="216" Margin="64,86,0,0" VerticalAlignment="Top" Width="165" Source="{Binding ImageSource}" Stretch="Fill" />
+        <Label Content="75 TL" HorizontalAlignment="Left" Margin="690,294,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

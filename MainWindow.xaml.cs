@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Security.Policy;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace CMPE312_PROJECT_TICKETSYSTEM
 {
@@ -75,7 +76,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             {
                 // Login başarılı
                 
-                MoviesPage MoviesPage = new MoviesPage(CId);
+                MoviesPage MoviesPage = new MoviesPage(CId, MId, MovieName, MovieType, MovieSummary, Movielanguage, MovieDuration, MovieImage);
                 MoviesPage.Show();
                 MessageBox.Show("Login is Successful");
                 this.Close();

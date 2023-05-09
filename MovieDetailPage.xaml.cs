@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,9 +28,10 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
         private string MovieSummary;
         private string MovieLanguage;
         private int MovieDuration;
-        private string MovieImage;
+        private byte[] MovieImage;
 
-        public MovieDetailPage(int CId, int MId, string MovieName, string MovieType, string MovieSummary, string MovieLanguage, int MovieDuration, string MovieImage)
+
+        public MovieDetailPage(int CId, int MId, string MovieName, string MovieType, string MovieSummary, string MovieLanguage, int MovieDuration, byte[] MovieImage)
         {
             InitializeComponent();
             this.CId= CId;
@@ -44,7 +48,29 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             MovieSummaryText.Text = MovieSummary;
             MovieLanguageText.Content = MovieLanguage;
             MovieDurationText.Content = MovieDuration;
+
+
+            if (MovieImage != null)
+            {
+                // Base64 kodunu byte dizisine dönüştürüyoruz
+                //byte[] imageBytes = Convert.FromBase64String(MovieImage);
+
+                // byte dizisini BitmapImage nesnesine dönüştürüyoruz
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = new MemoryStream(MovieImage);
+                bitmapImage.EndInit();
+
+                // Image kontrolünün Source özelliğine BitmapImage nesnesini atıyoruz
+                ImageBox.Source = bitmapImage;
+            }
+
+
+
         }
+
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
