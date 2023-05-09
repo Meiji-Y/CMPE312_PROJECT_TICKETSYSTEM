@@ -52,9 +52,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
             if (MovieImage != null)
             {
-                // Base64 kodunu byte dizisine dönüştürüyoruz
-                //byte[] imageBytes = Convert.FromBase64String(MovieImage);
-
+                
                 // byte dizisini BitmapImage nesnesine dönüştürüyoruz
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -65,12 +63,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
                 ImageBox.Source = bitmapImage;
             }
 
-
-
         }
-
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -17,20 +17,13 @@ using System.Windows.Shapes;
 
 namespace CMPE312_PROJECT_TICKETSYSTEM
 {
-    /// <summary>
-    /// MoviesPage.xaml etkileşim mantığı
-    /// </summary>
+
     
     public partial class MoviesPage : Window
     {
+      
         private int CId;
-        private int MId;
-        private string MovieName;
-        private string MovieType;
-        private string MovieSummary;
-        private string MovieLanguage;
-        private int MovieDuration;
-        private byte[] MovieImage;
+
 
         public void ShowDetail(int ParameterMId)
         {

@@ -21,53 +21,53 @@ using System.Security.Cryptography;
 
 namespace CMPE312_PROJECT_TICKETSYSTEM
 {
-    /// <summary>
-    /// MainWindow.xaml etkileşim mantığı
-    /// </summary>
+  
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            //SqlConnection sqlConnection;
+            
             InitializeComponent();
-            //string connectionString = ConfigurationManager.ConnectionStrings["CMPE312_PROJECT_TICKETSYSTEM.Properties.Settings.TicketSystemDBConnectionString"].ConnectionString;
-            //sqlConnection = new SqlConnection(connectionString);
-            //// Veritabanı bağlantısını aç
-            //sqlConnection.Open();
+           
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //string connectionString = "Server=DESKTOP-16LF7MC;Database=TicketSystemDB;";
-            // Kullanıcının girdiği
-            // ve şifre
+
+            // Veritabanı bağlantısını aç
             SqlConnection sqlConnection;
             string connectionString = ConfigurationManager.ConnectionStrings["CMPE312_PROJECT_TICKETSYSTEM.Properties.Settings.TicketSystemDBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
-            // Veritabanı bağlantısını aç
             
-
+            
+            
             string UserName = UnameTextbox.Text;
             string UserPassword = PasswordTextbox.Password;
 
-            // SQL sorgusu: verilen e-postaya sahip müşterinin şifresini sorgula
-            string query = "SELECT UserPassword FROM Customers WHERE UserName=@UserName";
-            // SqlCommand nesnesini oluştur
-            SqlCommand command = new SqlCommand(query, sqlConnection);
 
+            // kullancı adı ve şifreyi onaylamak
+            string query = "SELECT UserPassword FROM Customers WHERE UserName=@UserName";
+            SqlCommand command = new SqlCommand(query, sqlConnection);
             // Parametreleri ayarla
             command.Parameters.AddWithValue("@UserName", UserName);
             command.Parameters.AddWithValue("@UserPassword", UserPassword);
 
+
+
+            // CId yi çekmek için
             string query2 = "SELECT CId FROM Customers WHERE UserName=@UserName ";
             SqlCommand command2 = new SqlCommand(query2, sqlConnection);
             command2.Parameters.AddWithValue("@UserName", UserName);
+
+
             // Bağlantıyı aç
             sqlConnection.Open();
 
-            // Sorguyu çalıştır ve sonucu al
+            // Sorguyu çalıştır ve sonucları al
             var result =(string)command.ExecuteScalar();
             int CId = (int)command2.ExecuteScalar();
+
+
             // Bağlantıyı kapat
             sqlConnection.Close();
 

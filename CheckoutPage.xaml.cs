@@ -24,20 +24,21 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
     public partial class CheckoutPage : Window
     {
         public List<string> ttime = new List<string> { "13:40", "15:20", "18:30", "20:15", "22:25" };
-        private int CId;
+        public int CId;
         public byte[] MovieImage;
-        
+        public int MId;
+        public string MovieName;
+
         public CheckoutPage(int CId, int MId, string MovieName, string MovieType, string MovieSummary, string MovieLanguage, int MovieDuration, byte[] MovieImage)
         {
             InitializeComponent();
-            SqlConnection sqlConnection;
-            string connectionString = ConfigurationManager.ConnectionStrings["CMPE312_PROJECT_TICKETSYSTEM.Properties.Settings.TicketSystemDBConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
 
-            
-            
+
+            this.MId = MId;
             this.CId = CId;
             this.MovieImage = MovieImage;
+            this.MovieName = MovieName;
+            
 
             var items = ttime;
             foreach (var item in items)
@@ -48,18 +49,11 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
             MovieNameText.Content = MovieName;
             
-            
-          
-           
-
-
-
 
 
             if (MovieImage != null)
             {
-                // Base64 kodunu byte dizisine dönüştürüyoruz
-                //byte[] imageBytes = Convert.FromBase64String(MovieImage);
+                
 
                 // byte dizisini BitmapImage nesnesine dönüştürüyoruz
                 BitmapImage bitmapImage = new BitmapImage();
@@ -87,10 +81,10 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             string UserPassword = PasswordTextBox.Password;
             string CreditCard = CreditCardTextBox.Text;
 
-            DateTime selectedDate;
+            DateTime TicketDate;
             if (DatePickerData.SelectedDate.HasValue)
             {
-                selectedDate = DatePickerData.SelectedDate.Value;
+                TicketDate = DatePickerData.SelectedDate.Value;
             }
             else
             {
@@ -110,6 +104,29 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             string result = (string)command.ExecuteScalar();
             sqlConnection.Close();
 
+            string Hall = "Hall 2";
+            float Price = 75;
+            string TicketTime =ComboBoxData.SelectedValue.ToString();
+            int TId = GenerateTId();
+
+            string InsertQuery = "INSERT INTO Tickets (TId, MId, CId, TicketDate, Hall, Price, TicketTime, MovieName ) VALUES (@TId, @MId, @CId, @TicketDate, @Hall, @Price, @TicketTime, @MovieName)";
+
+            SqlCommand command2 = new SqlCommand(InsertQuery, sqlConnection);
+
+            command2.Parameters.AddWithValue("@TId", TId);
+            command2.Parameters.AddWithValue("@MId", MId);
+            command2.Parameters.AddWithValue("@CId", CId);
+            command2.Parameters.AddWithValue("@TicketDate", TicketDate);
+            command2.Parameters.AddWithValue("@Hall", Hall);
+            command2.Parameters.AddWithValue("@Price", Price);
+            command2.Parameters.AddWithValue("@TicketTime", TicketTime);
+            command2.Parameters.AddWithValue("@MovieName", MovieName);
+
+            sqlConnection.Open();
+            command2.ExecuteNonQuery();
+            sqlConnection.Close();
+
+
             if (result == UserPassword)
             {
                 MessageBox.Show("Payment is Completed");
@@ -122,6 +139,39 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
         }
 
-     
+        public int GenerateTId()
+        {
+            string IdLength = "4";
+            string TicketNumber = "";
+            int TicketId;
+
+            string allowedChars = "";
+            allowedChars = "1,2,3,4,5,6,7,8,9,0";
+
+
+            char[] sep = {
+                ','
+            };
+            string[] arr = allowedChars.Split(sep);
+
+
+            string IDString = "";
+            string temp = "";
+
+            Random rand = new Random();
+
+            for (int i = 0; i < Convert.ToInt32(IdLength); i++)
+            {
+                temp = arr[rand.Next(0, arr.Length)];
+                IDString += temp;
+                TicketNumber = IDString;
+
+            }
+            TicketId = Convert.ToInt32(TicketNumber);
+            return TicketId;
+        }
+
     }
+
+
 }
