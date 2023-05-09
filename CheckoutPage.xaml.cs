@@ -35,9 +35,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             sqlConnection = new SqlConnection(connectionString);
 
             
-            string UserPassword = PasswordTextBox.Password;        // Payment Failed hatası geliyor çünkü UserPassword "", buraya bakkk !           
             
-            string CreditCard = CreditCardTextBox.Text;
             this.CId = CId;
             this.MovieImage = MovieImage;
 
@@ -51,18 +49,11 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             MovieNameText.Content = MovieName;
             
             
-            string MovieTime = ComboBoxData.Text;
-
-            string query = "SELECT UserPassword FROM Customers WHERE CId=@CId ";
+          
            
 
 
-            SqlCommand command = new SqlCommand(query, sqlConnection);
-            command.Parameters.AddWithValue("@CId", CId);
-            command.Parameters.AddWithValue("@UserPassword", UserPassword);
-            sqlConnection.Open();
-            var result = (string)command.ExecuteScalar();
-            sqlConnection.Close();
+
 
 
             if (MovieImage != null)
@@ -91,32 +82,43 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
+
+
+            string UserPassword = PasswordTextBox.Password;
+            string CreditCard = CreditCardTextBox.Text;
 
             DateTime selectedDate;
             if (DatePickerData.SelectedDate.HasValue)
             {
                 selectedDate = DatePickerData.SelectedDate.Value;
-                // selectedDate değişkeni, seçilen tarih değeri ile dolu olacak.
             }
             else
             {
-                // Seçilen bir tarih yoksa, kullanıcıya bir hata mesajı gösterilebilir.
                 MessageBox.Show("Please select date.");
+                return;
             }
 
+            SqlConnection sqlConnection;
+            string connectionString = ConfigurationManager.ConnectionStrings["CMPE312_PROJECT_TICKETSYSTEM.Properties.Settings.TicketSystemDBConnectionString"].ConnectionString;
+            sqlConnection = new SqlConnection(connectionString);
 
-            //if (result == UserPassword)
-            //{
-            //    MessageBox.Show("Payment is Completed");
-            //    this.Close();
+            string query = "SELECT UserPassword FROM Customers WHERE CId=@CId ";
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+            command.Parameters.AddWithValue("@CId", CId);
+            command.Parameters.AddWithValue("@UserPassword", UserPassword);
+            sqlConnection.Open();
+            string result = (string)command.ExecuteScalar();
+            sqlConnection.Close();
 
-            //}
-            //else
-            //{
-            //    // Login başarısız
-            //    MessageBox.Show("Payemnt is Failed !");
-            //}
+            if (result == UserPassword)
+            {
+                MessageBox.Show("Payment is Completed");
+                
+            }
+            else
+            {
+                MessageBox.Show("Payment is Failed !");
+            }
 
         }
 

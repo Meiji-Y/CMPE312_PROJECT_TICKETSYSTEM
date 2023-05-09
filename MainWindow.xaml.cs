@@ -76,7 +76,7 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             {
                 // Login başarılı
                 
-                MoviesPage MoviesPage = new MoviesPage(CId, MId, MovieName, MovieType, MovieSummary, Movielanguage, MovieDuration, MovieImage);
+                MoviesPage MoviesPage = new MoviesPage(CId);
                 MoviesPage.Show();
                 MessageBox.Show("Login is Successful");
                 this.Close();

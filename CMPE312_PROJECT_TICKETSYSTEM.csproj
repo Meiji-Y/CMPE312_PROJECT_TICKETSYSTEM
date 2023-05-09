@@ -85,9 +85,6 @@
     <Compile Include="MoviesPage.xaml.cs">
       <DependentUpon>MoviesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyTicketsPage.xaml.cs">
-      <DependentUpon>MyTicketsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TicketSystemDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,10 +111,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MoviesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MyTicketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
