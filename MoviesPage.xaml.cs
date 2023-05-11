@@ -73,8 +73,6 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             InitializeComponent();
             this.CId = CId;
           
-           
-            
 
 
         }
@@ -105,6 +103,12 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
             ShowDetail(106);
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           MyTicketsPage MyTicketsPage = new MyTicketsPage(CId);
+
+            MyTicketsPage.Show(); 
+            this.Close();
+        }
     }
 }

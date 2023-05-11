@@ -92,6 +92,9 @@ namespace CMPE312_PROJECT_TICKETSYSTEM
                 return;
             }
 
+            if (Checkbox.IsChecked == false) { MessageBox.Show("Please confirm terms and conditions."); }
+            if (CreditCardTextBox.Text == "") { MessageBox.Show("Please type credit card number."); }
+
             SqlConnection sqlConnection;
             string connectionString = ConfigurationManager.ConnectionStrings["CMPE312_PROJECT_TICKETSYSTEM.Properties.Settings.TicketSystemDBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
